@@ -102,9 +102,11 @@ When you run Ollama, it starts a local API server (typically on port `11434`). T
 
 Ollama exposes a RESTful API that allows you to interact with the models. The main endpoints include:
 
-`/api/generate`: For text generation
-`/api/chat`: For chat-based interactions
-`/api/embeddings`: For generating text embeddings
+- `/api/generate`: For text generation
+
+- `/api/chat`: For chat-based interactions
+
+- `/api/embeddings`: For generating text embeddings
 
 `Model Loading`:
 
