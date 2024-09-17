@@ -69,17 +69,20 @@ Now you can chat with your model in real-time.
 ### Ollama Server Commands `ollama --help or -h`
 
 Available Commands:
-  serve       Start ollama
-  create      Create a model from a Modelfile
-  show        Show information for a model
-  run         Run a model
-  pull        Pull a model from a registry
-  push        Push a model to a registry
-  list        List models
-  ps          List running models
-  cp          Copy a model
-  rm          Remove a model
-  help        Help about any command
+
+| Command | Description |
+|---|---|
+| serve | Inicia o ollama |
+| create | Cria um modelo a partir de um Modelfile |
+| show | Mostra informações sobre um modelo |
+| run | Executa um modelo |
+| pull | Puxa um modelo de um registro |
+| push | Empurra um modelo para um registro |
+| list | Lista modelos |
+| ps | Lista modelos em execução |
+| cp | Copia um modelo |
+| rm | Remove um modelo |
+| help | Ajuda sobre qualquer comando |
 
 ### How Ollama works
 
