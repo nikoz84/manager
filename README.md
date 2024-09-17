@@ -1,67 +1,163 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# The Manager
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This package is for assistance project managers and automating boring tasks.
 
-## About Laravel
+## Installation laravel dependencies
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```bash
+composer install
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Supabase PostgreSQL with PGVector extension
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Configure the `.env` file to allow the connection to the PostgreSQL database.
 
-## Learning Laravel
+```bash
+cp .env.example .env
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Run laravel migrations
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+php artisan migrate
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Install Ollama Server on Linux
 
-## Laravel Sponsors
+Download and run the following command to install Ollama Server.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
 
-### Premium Partners
+Ollama server is now installed and running.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Ollama Server version
 
-## Contributing
+```bash
+ollama -v
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Download a model
 
-## Code of Conduct
+```bash
+ollama pull llama3.1:8b
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+List all the installed models
 
-## Security Vulnerabilities
+```bash
+ollama list
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Presentation of a models in a table list
 
-## License
+| NAME        | ID           | SIZE   | MODIFIED   |
+| ----------- | ------------ | ------ | ---------- |
+| llama3.1:8b | 42182419e950 | 4.7 GB | 6 days ago |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# manager
+All the models run on memory and they are expensive in terms of computation resources (Memory and CPU).
+
+### Run a model
+
+```bash
+ollama run llama3.1:8b
+```
+
+Now you can chat with your model in real-time.
+
+### Ollama Server Commands `ollama --help or -h`
+
+Available Commands:
+  serve       Start ollama
+  create      Create a model from a Modelfile
+  show        Show information for a model
+  run         Run a model
+  pull        Pull a model from a registry
+  push        Push a model to a registry
+  list        List models
+  ps          List running models
+  cp          Copy a model
+  rm          Remove a model
+  help        Help about any command
+
+### How Ollama works
+
+Ollama is an open-source project that makes it easy to set up and run large language models (LLMs) locally on your machine.
+Here's an overview of how the Ollama service works:
+
+`Local Deployment`:
+
+Ollama allows you to run AI models on your own hardware, which means you don't need to rely on cloud services. This can be beneficial for privacy, cost, and customization reasons.
+
+`Model Management`:
+
+Ollama simplifies the process of downloading, installing, and managing different AI models. It supports various models like Llama 2, GPT-J, and others.
+
+`API Server`:
+
+When you run Ollama, it starts a local API server (typically on port `11434`). This server acts as an interface between your applications and the AI models.
+
+`RESTful API`:
+
+Ollama exposes a RESTful API that allows you to interact with the models. The main endpoints include:
+
+`/api/generate`: For text generation
+`/api/chat`: For chat-based interactions
+`/api/embeddings`: For generating text embeddings
+
+`Model Loading`:
+
+When you make a request, Ollama loads the specified model into `memory` if it's not already loaded. This allows for efficient use of system resources.
+
+`Text Generation`:
+
+For text generation tasks, Ollama uses the loaded model to process your prompt and generate a response. This happens entirely on your local machine.
+
+`Streaming Responses`:
+
+Ollama supports streaming responses, which means it can send back generated text in real-time as it's being produced by the model.
+
+`Model Customization`:
+
+Ollama allows for some level of model customization through `Modelfiles`, which let you define specific parameters or fine-tuning for models.
+
+`CLI and GUI`:
+
+While Ollama primarily operates as a service, it also provides a command-line interface (CLI) for management tasks and can be used with various GUI applications built by the community.
+
+`Language Support`:
+
+The Ollama service itself is language-agnostic. It can be accessed from any programming language that can make HTTP requests, which is why we were able to interact with it using PHP in our previous examples.
+
+When you use Ollama, the typical flow is:
+
+- Start the Ollama service on your machine.
+- Your application sends a request to the Ollama API (e.g., for text generation).
+- Ollama loads the appropriate model if it's not already in memory.
+- The model processes your request locally.
+- Ollama streams the response back to your application.
+
+This local processing approach offers low latency and high privacy, as your data never leaves your machine. However, it does require more powerful hardware compared to using cloud-based AI services, especially for larger models.
+
+## Play with the command line and CURL
+
+You can query and test the API server using CURL.
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama3.1:8b",
+  "prompt": "Why is the sky blue?",
+  "stream": true
+}'
+```
+
+Without streaming:
+
+```bash
+curl http://localhost:11434/api/generate -d '{
+  "model": "llama3",
+  "prompt": "Why is the sky blue?",
+  "stream": false
+}'
+```
