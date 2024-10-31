@@ -1,13 +1,14 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Cloudstudio\Ollama\Facades\Ollama;
 use App\Models\Project;
+use Cloudstudio\Ollama\Facades\Ollama;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/projetos', function () {
     $projects = Project::all();
+
     return view('admin.projects.project-list', [
-        'projects' => $projects
+        'projects' => $projects,
     ]);
 });
 
@@ -20,4 +21,8 @@ Route::get('/ollama', function () {
         ->ask();
 
     return $response;
+});
+
+Route::get('/', function () {
+    return view('pages.index');
 });

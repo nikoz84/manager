@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
+use Tpetry\PostgresqlEnhanced\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -12,7 +12,8 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::statement('CREATE EXTENSION IF NOT EXISTS vector');
+        Schema::dropExtension('vector', 'unaccent');
+
     }
 
     /**
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down()
     {
-        DB::statement('DROP EXTENSION vector');
+        Schema::dropExtensionIfExists('vector', 'unaccent');
     }
 };

@@ -13,7 +13,8 @@ return new class extends Migration
     public function up(): void
     {
         $tableName = 'function_points';
-        Schema::create($tableName, function (Blueprint $table) {
+        Schema::create($tableName, function (Blueprint $table): void {
+            $table->comment('Persiste as funcionalidades do projeto');
             $table->id();
             $table->foreignId('project_id')->constrained();
             $table->foreignId('function_type_id')->constrained();
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->decimal('score', 5, 2)->comment('garante que os valores de pontos de função sejam armazenados com precisão de até duas casas decimais');
         });
 
-        DB::statement("COMMENT ON TABLE {$tableName} IS 'Persiste as funcionalidades do projeto'");
+
         DB::statement("ALTER TABLE {$tableName} ADD CONSTRAINT chk_complexity CHECK(complexity in ('Low', 'Medium', 'High'))");
     }
 

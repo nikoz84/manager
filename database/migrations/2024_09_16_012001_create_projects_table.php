@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
@@ -13,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         $tableName = 'projects';
-        Schema::create($tableName, function (Blueprint $table) {
+        Schema::create($tableName, function (Blueprint $table): void {
+            $table->comment('Persiste os projetos');
             $table->id();
             $table->string('name');
             $table->string('description');
@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('docs_url');
             $table->timestamps();
         });
-
-        DB::statement("COMMENT ON TABLE {$tableName} IS 'Persiste os projetos'");
     }
 
     /**
